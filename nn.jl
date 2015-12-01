@@ -6,8 +6,8 @@ function sigmoid(x, deriv)
 end
 
 
-function train_nn(weights, intermediateLayers, intDimension, truth)
-    numberOfIterations = 60000
+function train_nn(weights, intermediateLayers, intDimension, truth, numberOfIterations)
+
 
     layers = Dict()
     deltas = Dict()
@@ -35,18 +35,14 @@ function train_nn(weights, intermediateLayers, intDimension, truth)
     return layers
 end
 
-X = Array(Int32, 4, 3)
-
 X = [0 0 1; 0 1 1; 1 0 1; 1 1 1] 
-
 y = [0;1;1;0]
 
 # zero mean synapse weights
 
 intermediateLayers = 2
-
+numberOfIterations = 60000
 weights = Dict()
-
 intDimension = 10
 
 # Initialize weights
@@ -56,7 +52,7 @@ for ilayer in 1:intermediateLayers
 end
 weights[intermediateLayers+1] = 2*rand(intDimension,1)-1
 
-layers = train_nn(weights, intermediateLayers, intDimension, y)
+layers = train_nn(weights, intermediateLayers, intDimension, y, numberOfIterations)
 
 print("Final output:\n")
 print(layers[intermediateLayers+2])
